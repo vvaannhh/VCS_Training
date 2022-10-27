@@ -38,14 +38,11 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Role</th>
-                        <th>Action</th>
+                        <th><center>Action</center></th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php 
-                    // if(isset($messages)){
-                    //     echo $messages;
-                    // }
                     require_once '../config/connect.php';
                     $sql = "SELECT * FROM users";
                     $users = $conn->query($sql);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2022 at 08:15 PM
+-- Generation Time: Oct 27, 2022 at 07:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `challenge5a_anhdv`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exercises`
+--
+
+CREATE TABLE `exercises` (
+  `id` int(11) NOT NULL,
+  `author` varchar(30) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `filename` varchar(100) DEFAULT NULL,
+  `date` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exercises`
+--
+
+INSERT INTO `exercises` (`id`, `author`, `title`, `content`, `filename`, `date`) VALUES
+(8, 'teacher1', 'Bai1', 'prog1', '1666891622_anhdv_chall3.docx', '2022-10-28 00:27:02');
 
 -- --------------------------------------------------------
 
@@ -68,6 +90,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `email`, `phone`,
 --
 
 --
+-- Indexes for table `exercises`
+--
+ALTER TABLE `exercises`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
@@ -84,10 +112,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `exercises`
+--
+ALTER TABLE `exercises`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
