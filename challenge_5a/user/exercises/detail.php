@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  include '../../config/connect.php';
+  require_once '../../config/connect.php';
   if(!isset($_SESSION['user'])){
       header("Location: ../../index.php");
   }
@@ -26,32 +26,33 @@
   }
 
   elseif(isset($_POST['add']) && isset($_FILES['file']['name'])){
-    
-    $wb=['txt', 'docs', 'pdf'];
+    $wb=['txt', 'docx', 'pdf'];
     $filename=time().'_'.basename($_FILES['file']['name']);
     $path_file="uploads/stu/".$filename;
     $ext=strtolower(pathinfo($path_file,PATHINFO_EXTENSION));
     $file_tmp = $_FILES['file']['tmp_name'];
     $file_size = $_FILES['file']['size'];
-    if($file_size > 10485760){
-      $mess = "<h4 style='color: red;'>File is too big</h4>";
-    }
-    elseif($file_size <= 10485760 && in_array($ext,$wb)){
-      if(move_uploaded_file($file_tmp, $path_file)){
-        $author = $_SESSION['user'];
-        $title = $_POST['title'];
-        $ex = $row['title'];
-        $com = "INSERT INTO submit (title,author,exercise,file) VALUE ('$title','$author','$ex','$filename')";
-        if(mysqli_query($conn, $com)){
-          $mess = "<h4 style='color: green;'>File Saved Successfully!</h4>";
+    
+    if(in_array($ext,$wb)){
+        if($file_size > 10485760){
+            $mess = "<h4 style='color: red;'>File is too big</h4>";
         }
         else{
-          $mess = "<h4 style='color: red;'>File Save Failed!</h4>";
+            if(move_uploaded_file($file_tmp, $path_file)){
+            $author = $_SESSION['user'];
+            $title = $_POST['title'];
+            $ex = $row['title'];
+            $com = "INSERT INTO submit (title,author,exercise,file) VALUE ('$title','$author','$ex','$filename')";
+                if(mysqli_query($conn, $com)){
+                $mess = "<h4 style='color: green;'>File Saved Successfully!</h4>";
+                }
+                else{
+                $mess = "<h4 style='color: red;'>File Save Failed!</h4>";
+                }
+            }
         }
-      }
-      else $mess = "<h4 style='color: red;'>File Save Failed!</h4>";
     }
-    else $mess="<h4 style='color: red;'>Just upload txt, pdf, docx</h4>";
+    elseif($file_size <= 10485760 && !in_array($ext,$wb)) $mess="<h4 style='color: red;'>Just upload txt, pdf, docx</h4>";
   }
 ?>
 <!doctype html>
@@ -122,7 +123,7 @@
                 echo "<td>".$res['title']."</td>";
                 echo "<td>".$res['date']."</td>";
                 echo "<td>
-                        <a href='detailSubmit.php?id=".$res['id']."' class='btn btn-primary' style='float: right;margin-right: 8px'>Detail</a>
+                        <a href='ex_detail.php?id=".$res['id']."' class='btn btn-primary' style='float: right;margin-right: 8px'>Detail</a>
                         <form action='' method='post'>
                             <button type='submit' class='btn btn-primary' style='float: right;margin-right: 8px' onclick=\"return confirm('Delete Submit ?')\" name='delete' value='".$res['id']."'>Delete</button>
                         </form>
@@ -134,9 +135,9 @@
         </table>
       </div>
       <?php 
-        if(isset($mess)){
-          echo $mess;
-        }
+      }
+      if(isset($mess)){
+        echo $mess;
       }?>
     </div>   
     <!--  Optional JavaScript -->

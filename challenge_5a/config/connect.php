@@ -1,7 +1,7 @@
 <?php
     $host="localhost";
-    $username="root";
-    $pass="";
+    $username="admin";
+    $pass="password";
     $dbname="challenge_5a";
     $conn=mysqli_connect($host,$username,$pass,$dbname);
     if(!$conn){

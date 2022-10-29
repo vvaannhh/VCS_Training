@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2022 at 06:47 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 7.4.30
+-- Generation Time: Oct 29, 2022 at 04:09 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `challenge_5a`
+-- Database: `id19782123_challenge_5a`
 --
 
 -- --------------------------------------------------------
@@ -42,6 +42,28 @@ CREATE TABLE `exercises` (
 
 INSERT INTO `exercises` (`id`, `author`, `title`, `content`, `filename`, `date`) VALUES
 (8, 'teacher1', 'Bai1', 'prog1', '1666891622_anhdv_chall3.docx', '2022-10-28 00:27:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `game`
+--
+
+CREATE TABLE `game` (
+  `id` int(11) NOT NULL,
+  `author` varchar(100) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `hint` varchar(100) DEFAULT NULL,
+  `file` varchar(100) DEFAULT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`id`, `author`, `title`, `hint`, `file`, `date`) VALUES
+(3, 'teacher1', 'a', 'a', 'New Text Document.txt', '2022-10-29 00:43:20');
 
 -- --------------------------------------------------------
 
@@ -78,7 +100,7 @@ CREATE TABLE `submit` (
 --
 
 INSERT INTO `submit` (`id`, `title`, `author`, `exercise`, `file`, `date`) VALUES
-(5, 'sdasd', 'student1', 'Bai1', '1666932309_asd.txt', '2022-10-28 11:45:09');
+(8, 'aasd', 'student1', 'Bai1', '1666949099_New Text Document.txt', '2022-10-28 16:24:59');
 
 -- --------------------------------------------------------
 
@@ -118,6 +140,12 @@ ALTER TABLE `exercises`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `game`
+--
+ALTER TABLE `game`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
@@ -146,6 +174,12 @@ ALTER TABLE `exercises`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `game`
+--
+ALTER TABLE `game`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
@@ -155,7 +189,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `submit`
 --
 ALTER TABLE `submit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
